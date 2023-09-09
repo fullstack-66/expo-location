@@ -1,5 +1,6 @@
 import * as Location from "expo-location";
-import React, { useState } from "react";
+import * as TaskManager from "expo-task-manager";
+import React, { useState, useEffect } from "react";
 import {
   StyledView,
   StyledText,
@@ -7,10 +8,31 @@ import {
   StyledIcon,
 } from "./utils/nativewind-styled";
 
+TaskManager.defineTask(
+  "LOCATION_TASK",
+  ({ data: { locations: any }, error }) => {
+    if (error) {
+      // check `error.message` for more details.
+      return;
+    }
+    console.log("Received new locations", locations);
+  }
+);
+
 export default function App() {
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null
   );
+
+  useEffect(() => {
+    Location.getProviderStatusAsync().then((status) => {
+      console.log(status);
+
+      Location.hasServicesEnabledAsync().then((enabled) => {
+        console.log(enabled);
+      });
+    });
+  }, []);
 
   const [locationPermission, requestPermission] =
     Location.useForegroundPermissions();
