@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   SafeAreaView,
+  ScrollView
 } from "react-native";
 import { styled } from "nativewind";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -14,3 +15,4 @@ export const StyledTouchableOpacity = styled(TouchableOpacity);
 export const StyledIcon = styled(Ionicons);
 export const StyledImageBackground = styled(ImageBackground);
 export const StyledSafeAreaView = styled(SafeAreaView);
+export const StyledScrollView = styled(ScrollView);
